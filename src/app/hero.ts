@@ -1,4 +1,8 @@
 export interface Hero {
-    id: number;
-    name: string;
+    HeroId: number;
+    HeroName: string;
+    Department: string;
+    DateOfJoining: string;
+    PhotoFileName: string;
+    Rank: number;
 }

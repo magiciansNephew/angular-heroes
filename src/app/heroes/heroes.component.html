@@ -1,22 +1,48 @@
 <h2>My Heores</h2>
 
 <div>
-    <label id="new-hero">Hero name:</label>
-    <input for="new-hero" #heroName />
+  <label id="hero-name">Hero Name:</label>
+  <input for="hero-name" #heroName />
 
-    <!-- (click) passes input value to add() and then clears the input -->
-    <button class="add-button" (click)="add(heroName.value); heroName.value=''">
-        Add hero
-    </button>
+  <label id="department">Department:</label>
+  <input for="department" #department />
+
+  <label id="date-of-joining">Date of Joining:</label>
+  <input for="date-of-joining" #dateOfJoining />
+
+  <label id="photo-file-name">Photo File Name:</label>
+  <input for="photo-file-name" #photoFileName />
+
+  <label id="rank">Rank:</label>
+  <input for="rank" #rank />
+
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button
+    class="add-button"
+    (click)="
+      add(
+        heroName.value,
+        department.value,
+        dateOfJoining.value,
+        photoFileName.value,
+        rank.value
+      );
+      heroName.value = '';
+      department.value = '';
+      dateOfJoining.value = '';
+      photoFileName.value = '';
+      rank.value = ''
+    "
+  >
+    Add hero
+  </button>
 </div>
 
 <ul class="heroes">
-    <li *ngFor="let hero of heroes">
-        <a routerLink="/detail/{{hero.id}}">
-            <span class="badge">{{hero.id}}</span> {{hero.name}}
-        </a>
-        <button class="delete" title="delete hero"
-        (click)="delete(hero)">x</button>
-    </li>
-    
+  <li *ngFor="let hero of heroes">
+    <a routerLink="/detail/{{ hero.HeroId }}">
+      <span class="badge">{{ hero.HeroId }}</span> {{ hero.HeroName }}
+    </a>
+    <button class="delete" title="delete hero" (click)="delete(hero)">x</button>
+  </li>
 </ul>

@@ -1,10 +1,19 @@
 <div *ngIf="hero">
 
-    <h2>{{hero.name | uppercase}} Details</h2>
-    <div><span>id: </span>{{hero.id}}</div>
+    <h2>{{hero.HeroName | uppercase}} Details</h2>
+    <div><span>id: </span>{{hero.HeroId}}</div>
     <div>
-        <label>name:
-            <input [(ngModel)]="hero.name" placeholder="name" />
+        <label>Name:
+            <input [(ngModel)]="hero.HeroName" placeholder="Name" />
+        </label>
+        <label>Department:
+            <input [(ngModel)]="hero.Department" placeholder="Department" />
+        </label>
+        <label>Date of Joining:
+            <input [(ngModel)]="hero.DateOfJoining" placeholder="Date of Joining" />
+        </label>
+        <label>Rank:
+            <input [(ngModel)]="hero.Rank" placeholder="Rank" />
         </label>
     </div>
     <button (click)="goBack()">go back</button>
