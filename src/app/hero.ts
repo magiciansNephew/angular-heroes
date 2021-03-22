@@ -4,5 +4,5 @@ export interface Hero {
     Department: string;
     DateOfJoining: string;
     PhotoFileName: string;
-    Rank: number;
+    Rank: string;
 }
