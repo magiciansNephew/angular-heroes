@@ -3,36 +3,44 @@
 <div>
   <div class="input-wrap">
     <label id="hero-name">Hero Name:</label>
-    <input for="hero-name" #heroName (focusout)="nameCheck(heroName.value);" />
+    <input for="hero-name" #heroName (focusout)="nameCheck(heroName.value)" />
     <span class="error-msg">{{ nameError }}</span>
   </div>
 
   <div class="input-wrap">
     <label id="department">Department:</label>
-    <input for="department" #department (focusout)="departmentCheck(department.value);" />
+    <input
+      for="department"
+      #department
+      (focusout)="departmentCheck(department.value)"
+    />
     <span class="error-msg">{{ departmentError }}</span>
-
   </div>
 
   <div class="input-wrap">
     <label id="date-of-joining">Date of Joining:</label>
-    <input for="date-of-joining" #dateOfJoining (focusout)="dateCheck(dateOfJoining.value);"/>
+    <input
+      for="date-of-joining"
+      #dateOfJoining
+      (focusout)="dateCheck(dateOfJoining.value)"
+    />
     <span class="error-msg">{{ dateError }}</span>
-
   </div>
 
   <div class="input-wrap">
     <label id="photo-file-name">Photo File Name:</label>
-    <input for="photo-file-name" #photoFileName (focusout)="picCheck(photoFileName.value);"/>
+    <input
+      for="photo-file-name"
+      #photoFileName
+      (focusout)="picCheck(photoFileName.value)"
+    />
     <span class="error-msg">{{ picError }}</span>
-
   </div>
 
   <div class="input-wrap">
     <label id="rank">Rank:</label>
-    <input for="rank" #rank (focusout)="rankCheck(rank.value);" />
+    <input for="rank" #rank (focusout)="rankCheck(rank.value)" />
     <span class="error-msg">{{ rankError }}</span>
-
   </div>
 
   <!-- (click) passes input value to add() and then clears the input -->
@@ -45,7 +53,7 @@
         dateOfJoining.value,
         photoFileName.value,
         rank.value
-      );
+      )
     "
   >
     Add hero
