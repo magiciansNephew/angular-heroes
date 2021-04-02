@@ -28,31 +28,17 @@ export class HeroesComponent implements OnInit {
     PhotoFileName: string,
     Rank: string
   ): void {
-    this.nameCheck(HeroName);
-    this.departmentCheck(Department);
-    this.dateCheck(DateOfJoining);
-    this.picCheck(PhotoFileName);
-    this.rankCheck(Rank);
-
-    if (
-      this.nameError == undefined &&
-      this.departmentError == undefined &&
-      this.dateError == undefined &&
-      this.picError == undefined &&
-      this.rankError == undefined
-    ) {
-      this.heroService
-        .addHero({
-          HeroName,
-          Department,
-          DateOfJoining,
-          PhotoFileName,
-          Rank,
-        } as Hero)
-        .subscribe((_) => {
-          this.getHeroes();
-        });
-    }
+    this.heroService
+      .addHero({
+        HeroName,
+        Department,
+        DateOfJoining,
+        PhotoFileName,
+        Rank,
+      } as Hero)
+      .subscribe((_) => {
+        this.getHeroes();
+      });
   }
 
   delete(hero: Hero): void {
@@ -71,8 +57,7 @@ export class HeroesComponent implements OnInit {
   validation = new FormValidation.InputValidation();
 
   nameCheck(input: string) {
-
-    try { 
+    try {
       this.validation.noEmptyValidation(input);
     } catch (error) {
       this.nameError = error.message;
