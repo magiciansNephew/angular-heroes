@@ -92,10 +92,6 @@ button.delete:hover {
   margin: 15px 0;
 }
 
-/* .error-msg{
-  display: none;
-} */
-
-.error-msg.show{
-  display: initial;
+.error-msg{
+  color: red;
 }

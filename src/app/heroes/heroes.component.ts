@@ -28,17 +28,25 @@ export class HeroesComponent implements OnInit {
     PhotoFileName: string,
     Rank: string
   ): void {
-    this.heroService
-      .addHero({
-        HeroName,
-        Department,
-        DateOfJoining,
-        PhotoFileName,
-        Rank,
-      } as Hero)
-      .subscribe((_) => {
-        this.getHeroes();
-      });
+    this.nameCheck(HeroName);
+    this.departmentCheck(Department);
+    this.dateCheck(DateOfJoining);
+    this.picCheck(PhotoFileName);
+    this.rankCheck(Rank);
+
+    if (this.validationDone) {
+      this.heroService
+        .addHero({
+          HeroName,
+          Department,
+          DateOfJoining,
+          PhotoFileName,
+          Rank,
+        } as Hero)
+        .subscribe((_) => {
+          this.getHeroes();
+        });
+    }
   }
 
   delete(hero: Hero): void {
@@ -54,49 +62,62 @@ export class HeroesComponent implements OnInit {
   picError: string;
   rankError: string;
 
+  validationDone = false;
+
   validation = new FormValidation.InputValidation();
 
   nameCheck(input: string) {
     try {
       this.validation.noEmptyValidation(input);
+      this.validationDone = true;
+      this.nameError = undefined;
     } catch (error) {
       this.nameError = error.message;
+      this.validationDone = false;
     }
   }
 
   departmentCheck(input: string) {
-    try{
-
+    try {
       this.validation.noEmptyValidation(input);
-    }catch(error){
+      this.validationDone = true;
+      this.departmentError = undefined;
+    } catch (error) {
       this.departmentError = error.message;
+      this.validationDone = false;
     }
   }
 
   dateCheck(input: string) {
-    try{
-
+    try {
       this.validation.dateValidation(input);
-    }catch(error){
-      this.picError = error.message;
+      this.validationDone = true;
+      this.dateError = undefined;
+    } catch (error) {
+      this.dateError = error.message;
+      this.validationDone = false;
     }
   }
 
   picCheck(input: string) {
-    try{
-
+    try {
       this.validation.noEmptyValidation(input);
-    }catch(error){
-      this.dateError = error.message;
+      this.validationDone = true;
+      this.picError = undefined;
+    } catch (error) {
+      this.picError = error.message;
+      this.validationDone = false;
     }
   }
 
   rankCheck(input: string) {
-    try{
-
+    try {
       this.validation.numberValidation(input);
-    }catch(error){
+      this.validationDone = true;
+      this.rankError = undefined;
+    } catch (error) {
       this.rankError = error.message;
+      this.validationDone = false;
     }
   }
 }
