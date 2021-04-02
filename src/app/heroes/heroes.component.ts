@@ -65,18 +65,38 @@ export class HeroesComponent implements OnInit {
   }
 
   departmentCheck(input: string) {
-    this.validation.noEmptyValidation(input);
+    try{
+
+      this.validation.noEmptyValidation(input);
+    }catch(error){
+      this.departmentError = error.message;
+    }
   }
 
   dateCheck(input: string) {
-    this.dateError = this.validation.dateValidation(input);
+    try{
+
+      this.validation.dateValidation(input);
+    }catch(error){
+      this.picError = error.message;
+    }
   }
 
   picCheck(input: string) {
-    this.validation.noEmptyValidation(input);
+    try{
+
+      this.validation.noEmptyValidation(input);
+    }catch(error){
+      this.dateError = error.message;
+    }
   }
 
   rankCheck(input: string) {
-    this.rankError = this.validation.numberValidation(input);
+    try{
+
+      this.validation.numberValidation(input);
+    }catch(error){
+      this.rankError = error.message;
+    }
   }
 }
