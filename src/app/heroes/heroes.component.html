@@ -3,8 +3,8 @@
 <div>
   <div class="input-wrap">
     <label id="hero-name">Hero Name:</label>
-    <input for="hero-name" #heroName (focusout)="nameCheck(heroName.value)" />
-    <span class="error-msg">{{ nameError }}</span>
+    <input for="hero-name" #heroName (focusout)="this.fieldValidation.nameCheck(heroName.value)" />
+    <span class="error-msg">{{ this.fieldValidation.nameError }}</span>
   </div>
 
   <div class="input-wrap">
@@ -12,9 +12,9 @@
     <input
       for="department"
       #department
-      (focusout)="departmentCheck(department.value)"
+      (focusout)="this.fieldValidation.departmentCheck(department.value)"
     />
-    <span class="error-msg">{{ departmentError }}</span>
+    <span class="error-msg">{{ this.fieldValidation.departmentError }}</span>
   </div>
 
   <div class="input-wrap">
@@ -22,9 +22,9 @@
     <input
       for="date-of-joining"
       #dateOfJoining
-      (focusout)="dateCheck(dateOfJoining.value)"
+      (focusout)="this.fieldValidation.dateCheck(dateOfJoining.value)"
     />
-    <span class="error-msg">{{ dateError }}</span>
+    <span class="error-msg">{{ this.fieldValidation.dateError }}</span>
   </div>
 
   <div class="input-wrap">
@@ -32,15 +32,15 @@
     <input
       for="photo-file-name"
       #photoFileName
-      (focusout)="picCheck(photoFileName.value)"
+      (focusout)="this.fieldValidation.picCheck(photoFileName.value)"
     />
-    <span class="error-msg">{{ picError }}</span>
+    <span class="error-msg">{{ this.fieldValidation.picError }}</span>
   </div>
 
   <div class="input-wrap">
     <label id="rank">Rank:</label>
-    <input for="rank" #rank (focusout)="rankCheck(rank.value)" />
-    <span class="error-msg">{{ rankError }}</span>
+    <input for="rank" #rank (focusout)="this.fieldValidation.rankCheck(rank.value)" />
+    <span class="error-msg">{{ this.fieldValidation.rankError }}</span>
   </div>
 
   <!-- (click) passes input value to add() and then clears the input -->
@@ -53,7 +53,8 @@
         dateOfJoining.value,
         photoFileName.value,
         rank.value
-      )
+      );
+      
     "
   >
     Add hero
