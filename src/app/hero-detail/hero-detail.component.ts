@@ -4,6 +4,8 @@ import { Location } from '@angular/common';
 
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
+import * as FormValidation from '../form-validation';
+
 
 @Component({
   selector: 'app-hero-detail',
@@ -13,6 +15,9 @@ import { HeroService } from '../hero.service';
 export class HeroDetailComponent implements OnInit {
 
   hero: Hero;
+
+  // Form Validations
+  fieldValidation = new FormValidation.FieldValidation();
 
   constructor(
     private route: ActivatedRoute,
@@ -35,8 +40,18 @@ export class HeroDetailComponent implements OnInit {
   }
 
   save(): void{
-    this.heroService.updateHero(this.hero)
+
+    this.fieldValidation.nameCheck(this.hero.HeroName);
+    this.fieldValidation.departmentCheck(this.hero.Department);
+    this.fieldValidation.dateCheck(this.hero.DateOfJoining);
+    this.fieldValidation.picCheck(this.hero.PhotoFileName);
+    this.fieldValidation.rankCheck(this.hero.Rank.toString());
+
+    if (this.fieldValidation.validationDone) {
+      this.heroService.updateHero(this.hero)
       .subscribe(() => this.goBack());
+    }
+    
   }
 
 }

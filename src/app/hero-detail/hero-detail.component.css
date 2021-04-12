@@ -6,6 +6,7 @@ label {
   input {
     font-size: 1em;
     padding: .5rem;
+    display: block;
   }
   button {
     margin-top: 20px;
@@ -21,4 +22,12 @@ label {
     background-color: #eee;
     color: #ccc;
     cursor: auto;
+  }
+
+  .input-wrap{
+    margin: 15px 0;
+  }
+  
+  .error-msg{
+    color: red;
   }

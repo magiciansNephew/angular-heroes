@@ -1,21 +1,63 @@
 <div *ngIf="hero">
-
-    <h2>{{hero.HeroName | uppercase}} Details</h2>
-    <div><span>id: </span>{{hero.HeroId}}</div>
-    <div>
-        <label>Name:
-            <input [(ngModel)]="hero.HeroName" placeholder="Name" />
-        </label>
-        <label>Department:
-            <input [(ngModel)]="hero.Department" placeholder="Department" />
-        </label>
-        <label>Date of Joining:
-            <input [(ngModel)]="hero.DateOfJoining" placeholder="Date of Joining" />
-        </label>
-        <label>Rank:
-            <input [(ngModel)]="hero.Rank" placeholder="Rank" />
-        </label>
+  <h2>{{ hero.HeroName | uppercase }} Details</h2>
+  <div><span>id: </span>{{ hero.HeroId }}</div>
+  <div>
+    <div class="input-wrap">
+      <label>Name:</label>
+      <input
+        [(ngModel)]="hero.HeroName"
+        placeholder="Name"
+        #heroName
+        (focusout)="this.fieldValidation.nameCheck(heroName.value)"
+      />
+      <span class="error-msg">{{ this.fieldValidation.nameError }}</span>
     </div>
-    <button (click)="goBack()">go back</button>
-    <button (click)="save()">save</button>
+
+    <div class="input-wrap">
+      <label>Department:</label>
+      <input
+        [(ngModel)]="hero.Department"
+        placeholder="Department"
+        #department
+        (focusout)="this.fieldValidation.departmentCheck(department.value)"
+      />
+      <span class="error-msg">{{ this.fieldValidation.departmentError }}</span>
+    </div>
+
+    <div class="input-wrap">
+      <label>Date of Joining:</label>
+      <input
+        [(ngModel)]="hero.DateOfJoining"
+        placeholder="Date of Joining"
+        #dateOfJoining
+        (focusout)="this.fieldValidation.dateCheck(dateOfJoining.value)"
+      />
+      <span class="error-msg">{{ this.fieldValidation.dateError }}</span>
+    </div>
+
+    <div class="input-wrap">
+      <label>Phot File Name:</label>
+      <input
+        [(ngModel)]="hero.PhotoFileName"
+        placeholder="Photo File Name"
+        #photoFileName
+        (focusout)="this.fieldValidation.picCheck(photoFileName.value)"
+      />
+      <span class="error-msg">{{ this.fieldValidation.picError }}</span>
+    </div>
+
+    <div class="input-wrap">
+      <label>Rank:</label>
+      <input
+        [(ngModel)]="hero.Rank"
+        placeholder="Rank"
+        #rank
+        (focusout)="this.fieldValidation.rankCheck(rank.value)"
+      />
+      <span class="error-msg">{{ this.fieldValidation.rankError }}</span>
+    </div>
+    
+  </div>
+  <button (click)="goBack()">go back</button>
+  <button (click)="save()">save</button>
 </div>

@@ -12,14 +12,15 @@ export class InputValidation {
   constructor() {}
 
   noEmptyValidation(inputData: string) {
-    var data = inputData.trim();
+      var data = inputData.trim();
     if (!data) {
       throw new PropertyRequiredError("Can't be empty.");
     }
   }
 
   numberValidation(inputData: string) {
-    var data = inputData.trim();
+      var data = inputData.trim();
+
     if (!data) {
       throw new PropertyRequiredError("Can't be empty.");
     } else if (data.search(/^\d*$/) == -1) {

@@ -3,7 +3,11 @@
 <div>
   <div class="input-wrap">
     <label id="hero-name">Hero Name:</label>
-    <input for="hero-name" #heroName (focusout)="this.fieldValidation.nameCheck(heroName.value)" />
+    <input
+      for="hero-name"
+      #heroName
+      (focusout)="this.fieldValidation.nameCheck(heroName.value)"
+    />
     <span class="error-msg">{{ this.fieldValidation.nameError }}</span>
   </div>
 
@@ -39,7 +43,11 @@
 
   <div class="input-wrap">
     <label id="rank">Rank:</label>
-    <input for="rank" #rank (focusout)="this.fieldValidation.rankCheck(rank.value)" />
+    <input
+      for="rank"
+      #rank
+      (focusout)="this.fieldValidation.rankCheck(rank.value)"
+    />
     <span class="error-msg">{{ this.fieldValidation.rankError }}</span>
   </div>
 
@@ -53,8 +61,7 @@
         dateOfJoining.value,
         photoFileName.value,
         rank.value
-      );
-      
+      )
     "
   >
     Add hero
