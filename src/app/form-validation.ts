@@ -1,3 +1,5 @@
+import { Hero } from './hero';
+
 export class PropertyRequiredError extends Error {
   /*...*/
 }
@@ -11,34 +13,39 @@ export class DateFormatError extends Error {
 export class InputValidation {
   constructor() {}
 
-  noEmptyValidation(inputData: string) {
-      var data = inputData.trim();
-    if (!data) {
-      throw new PropertyRequiredError("Can't be empty.");
-    }
-  }
-
-  numberValidation(inputData: string) {
-      var data = inputData.trim();
-
-    if (!data) {
-      throw new PropertyRequiredError("Can't be empty.");
-    } else if (data.search(/^\d*$/) == -1) {
-      throw new NumberTypeError('Must be a number.');
-    }
-  }
-
-  dateValidation(inputData: string) {
+  noEmptyValidation(inputData: string): string {
     var data = inputData.trim();
+
     if (!data) {
-      throw new PropertyRequiredError("Can't be empty.");
+      return "Can't be empty.";
     } else {
-      if (
-        data.search(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/) ==
-        -1
-      ) {
-        throw new DateFormatError("Date format must be in: 'yyyy-mm-dd'");
-      }
+      return 'pass';
+    }
+  }
+
+  numberValidation(inputData: string): string {
+    var data = inputData.trim();
+
+    if (!data) {
+      return "Can't be empty.";
+    } else if (data.search(/^\d*$/) == -1) {
+      return 'Must be a number.';
+    } else {
+      return 'pass';
+    }
+  }
+
+  dateValidation(inputData: string): string {
+    var data = inputData.trim();
+
+    if (!data) {
+      return "Can't be empty.";
+    } else if (
+      data.search(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/) == -1
+    ) {
+      return "Date format must be: 'yyyy-mm-dd'";
+    } else {
+      return 'pass';
     }
   }
 }
@@ -54,60 +61,71 @@ export class FieldValidation extends InputValidation {
   picError: string;
   rankError: string;
 
-  validationDone = false;
+  // single input validations
 
   nameCheck(input: string) {
-    try {
-      this.noEmptyValidation(input);
-      this.validationDone = true;
-      this.nameError = undefined;
-    } catch (error) {
-      this.nameError = error.message;
-      this.validationDone = false;
+    var msg = this.noEmptyValidation(input);
+
+    if (msg == 'pass') {
+      this.nameError = '';
+    } else {
+      this.nameError = msg;
+      throw new PropertyRequiredError(msg);
     }
   }
 
   departmentCheck(input: string) {
-    try {
-      this.noEmptyValidation(input);
-      this.validationDone = true;
-      this.departmentError = undefined;
-    } catch (error) {
-      this.departmentError = error.message;
-      this.validationDone = false;
+    var msg = this.noEmptyValidation(input);
+    if (msg == 'pass') {
+      this.departmentError = '';
+    } else {
+      this.departmentError = msg;
+      throw new PropertyRequiredError(msg);
     }
   }
 
   dateCheck(input: string) {
-    try {
-      this.dateValidation(input);
-      this.validationDone = true;
-      this.dateError = undefined;
-    } catch (error) {
-      this.dateError = error.message;
-      this.validationDone = false;
+    var msg = this.dateValidation(input);
+    if (msg == 'pass') {
+      this.dateError = '';
+    }else if(msg.includes("Date format")){
+      this.dateError = msg;
+      throw new DateFormatError(msg);
+    }else{
+      this.dateError = msg;
+      throw new PropertyRequiredError(msg);
     }
   }
 
   picCheck(input: string) {
-    try {
-      this.noEmptyValidation(input);
-      this.validationDone = true;
-      this.picError = undefined;
-    } catch (error) {
-      this.picError = error.message;
-      this.validationDone = false;
+    var msg = this.noEmptyValidation(input);
+    if(msg == 'pass'){
+      this.picError = '';
+    }else{
+      this.picError = msg;
+      throw new PropertyRequiredError(msg);
     }
   }
 
   rankCheck(input: string) {
-    try {
-      this.numberValidation(input);
-      this.validationDone = true;
-      this.rankError = undefined;
-    } catch (error) {
-      this.rankError = error.message;
-      this.validationDone = false;
+    var msg = this.numberValidation(input);
+    if(msg == 'pass'){
+      this.rankError = '';
+    }else if(msg.includes('Must be')){
+      this.rankError = msg;
+      throw new NumberTypeError(msg);
+    }else{
+      this.rankError = msg;
+      throw new PropertyRequiredError(msg);
     }
+  }
+
+  // bulk validation
+  bulkValidator(obj: Hero) {
+    this.nameCheck(obj.HeroName);
+    this.departmentCheck(obj.Department);
+    this.dateCheck(obj.DateOfJoining);
+    this.picCheck(obj.PhotoFileName);
+    this.rankCheck(obj.Rank.toString());
   }
 }

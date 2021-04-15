@@ -10,7 +10,7 @@ import * as FormValidation from '../form-validation';
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[];
-  
+
   // Form Validations
   fieldValidation = new FormValidation.FieldValidation();
 
@@ -31,31 +31,22 @@ export class HeroesComponent implements OnInit {
     PhotoFileName: string,
     Rank: string
   ): void {
-    this.fieldValidation.nameCheck(HeroName);
-    this.fieldValidation.departmentCheck(Department);
-    this.fieldValidation.dateCheck(DateOfJoining);
-    this.fieldValidation.picCheck(PhotoFileName);
-    this.fieldValidation.rankCheck(Rank);
+    var heroObj = {
+      HeroName,
+      Department,
+      DateOfJoining,
+      PhotoFileName,
+      Rank,
+    } as Hero;
 
-    if (this.fieldValidation.validationDone) {
-      this.heroService
-        .addHero({
-          HeroName,
-          Department,
-          DateOfJoining,
-          PhotoFileName,
-          Rank,
-        } as Hero)
-        .subscribe((_) => {
-          this.getHeroes();
-        });
-    }
+    this.fieldValidation.bulkValidator(heroObj);
+    this.heroService.addHero(heroObj).subscribe((_) => {
+      this.getHeroes();
+    });
   }
 
   delete(hero: Hero): void {
     this.heroes = this.heroes.filter((h) => h !== hero);
     this.heroService.deleteHero(hero).subscribe();
   }
-
-  
 }
